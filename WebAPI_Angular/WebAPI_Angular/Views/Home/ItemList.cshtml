@@ -1,0 +1,95 @@
+﻿@section scripts {
+
+    <link href="~/Content/mystyle.css" rel="stylesheet" />
+    <script src="~/Scripts/library/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/library/angular.js"></script>
+    <script src="~/Scripts/app.js"></script>
+    <script src="~/Scripts/factory.js"></script>
+    <script src="~/Scripts/controller.js"></script>
+}
+
+<div ng-app="myapp" id="body">
+    <div ng-controller="itemController">
+        <h3>Список изделий:</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th style="display: none;">ID</th>
+                    <th>Наименование</th>
+                    <th>Количество</th>
+                    <th>Цена</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="items in itemsData">
+                    <td hidden="hidden">{{items.ItemId}}</td>
+                    <td>{{items.Name}}</td>
+                    <td>{{items.Count}}</td>
+                    <td>{{items.Price }}</td>
+                    <td>
+                        <button ng-model="$scope.Items" ng-click="edit(itemsData[$index])">Редактировать</button>
+                        <button ng-click="delete($index)">Удалить</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br />
+        <div style="border-top: solid 2px #282828; width: 430px; height: 10px"> </div>
+
+        <div ng-show="Items.ItemId != '' ">
+            <div>
+                <h2>Изменить</h2>
+            </div>
+            <div hidden="hidden">
+                <label for="ItemId">ItemId</label>
+                <input type="text" data-ng-model="Items.ItemId" />
+            </div>
+            <div>
+                <label for="name">Наименование</label>
+                <input type="text" data-ng-model="Items.Name" />
+            </div>
+
+            <div>
+                <label for="count">Количество</label>
+                <input type="text" data-ng-model="Items.Count" />
+            </div>
+
+            <div>
+                <label for="price">Цена</label>
+                <input type="text" data-ng-model="Items.Price" />
+            </div>
+            <br />
+            <div>
+                <button data-ng-click="update()">Изменить</button>
+                <button data-ng-click="cancel()">Отменить</button>
+            </div>
+        </div>
+
+        <div ng-hide="Items.ItemId != '' ">
+            <div>
+                <h2>Добавление</h2>
+            </div>
+            <div>
+                <label for="name">Наименование</label>
+                <input type="text" data-ng-model="Items.Name" />
+            </div>
+
+            <div>
+                <label for="count">Количество</label>
+                <input type="text" data-ng-model="Items.Count" />
+            </div>
+
+            <div>
+                <label for="price">Цена</label>
+                <input type="text" data-ng-model="Items.Price" />
+            </div>
+            <br />
+            <div>
+                <button data-ng-click="save()">Сохранить</button>
+                <button data-ng-click="clear()">Отменить</button>
+            </div>
+        </div>
+    </div>
+</div>
+
